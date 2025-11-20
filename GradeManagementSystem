@@ -1,0 +1,54 @@
+package Developers_Arena;
+import java.util.Scanner;
+
+public class GradeManagementSystem {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Step 1: Get number of students and subjects
+        System.out.print("Enter number of students: ");
+        int numStudents = sc.nextInt();
+
+        System.out.print("Enter number of subjects: ");
+        int numSubjects = sc.nextInt();
+
+        // Step 2: Create arrays to store marks and averages
+        double[][] marks = new double[numStudents][numSubjects];
+        double[] averages = new double[numStudents];
+        char[] grades = new char[numStudents];
+
+        // Step 3: Input marks for each student
+        for (int i = 0; i < numStudents; i++) {
+            System.out.println("\nEnter marks for Student " + (i + 1) + ":");
+            double total = 0;
+            for (int j = 0; j < numSubjects; j++) {
+                System.out.print("  Subject " + (j + 1) + ": ");
+                marks[i][j] = sc.nextDouble();
+                total += marks[i][j];
+            }
+            // Step 4: Calculate average
+            averages[i] = total / numSubjects;
+
+            // Step 5: Assign grade
+            if (averages[i] >= 90)
+                grades[i] = 'A';
+            else if (averages[i] >= 80)
+                grades[i] = 'B';
+            else if (averages[i] >= 70)
+                grades[i] = 'C';
+            else if (averages[i] >= 60)
+                grades[i] = 'D';
+            else
+                grades[i] = 'F';
+        }
+
+        // Step 6: Display results
+        System.out.println("\n===== Student Grade Report =====");
+        System.out.printf("%-10s %-15s %-10s\n", "Student", "Average Marks", "Grade");
+        for (int i = 0; i < numStudents; i++) {
+            System.out.printf("%-10d %-15.2f %-10c\n", (i + 1), averages[i], grades[i]);
+        }
+
+        sc.close();
+    }
+}
